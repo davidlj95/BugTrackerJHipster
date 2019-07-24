@@ -102,7 +102,8 @@ public class TicketResource {
         if (eagerload) {
             page = ticketRepository.findAllWithEagerRelationships(pageable);
         } else {
-            page = ticketRepository.findAll(pageable);
+            //page = ticketRepository.findAll(pageable);
+            page = ticketRepository.findAllByOrderByDueDateAsc(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
